@@ -1,0 +1,125 @@
+-- Merging decision tree log ---
+manifest
+ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:2:1-41:12
+INJECTED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:2:1-41:12
+INJECTED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:2:1-41:12
+INJECTED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:2:1-41:12
+MERGED from [com.android.support:appcompat-v7:22.0.0] C:\Users\Jack\.gradle\caches\transforms-1\files-1.1\appcompat-v7-22.0.0.aar\df32c0d3ad43f67d91f68840b53e71d9\AndroidManifest.xml:17:1-24:12
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\Jack\.gradle\caches\transforms-1\files-1.1\support-v4-22.0.0.aar\6a4db88a9adb9e0bd8c7ca9e95a5739a\AndroidManifest.xml:17:1-24:12
+INJECTED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:2:1-41:12
+INJECTED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:2:1-41:12
+INJECTED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:2:1-41:12
+	package
+		ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:3:7-24
+		INJECTED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml
+		INJECTED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml
+	android:versionName
+		ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:5:7-36
+		INJECTED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml
+		INJECTED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:2:11-69
+	android:versionCode
+		ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:4:7-30
+		INJECTED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml
+		INJECTED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml
+uses-sdk
+ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:6:5-7:11
+INJECTED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:6:5-7:11
+INJECTED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:6:5-7:11
+MERGED from [com.android.support:appcompat-v7:22.0.0] C:\Users\Jack\.gradle\caches\transforms-1\files-1.1\appcompat-v7-22.0.0.aar\df32c0d3ad43f67d91f68840b53e71d9\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:appcompat-v7:22.0.0] C:\Users\Jack\.gradle\caches\transforms-1\files-1.1\appcompat-v7-22.0.0.aar\df32c0d3ad43f67d91f68840b53e71d9\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\Jack\.gradle\caches\transforms-1\files-1.1\support-v4-22.0.0.aar\6a4db88a9adb9e0bd8c7ca9e95a5739a\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\Jack\.gradle\caches\transforms-1\files-1.1\support-v4-22.0.0.aar\6a4db88a9adb9e0bd8c7ca9e95a5739a\AndroidManifest.xml:20:5-43
+INJECTED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:6:5-7:11
+INJECTED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:6:5-7:11
+	android:targetSdkVersion
+		ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:6:15-44
+		INJECTED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml
+		INJECTED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml
+		ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:6:5-7:11
+		INJECTED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:8:5-95
+	android:name
+		ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:8:22-76
+uses-permission#android.permission.ACCESS_COARSE_LOCATION
+ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:9:5-80
+	android:name
+		ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:9:22-78
+uses-permission#android.permission.READ_PHONE_STATE
+ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:10:5-75
+	android:name
+		ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:10:22-72
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:11:5-97
+	android:name
+		ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:11:22-78
+uses-permission#android.permission.INTERNET
+ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:12:5-66
+	android:name
+		ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:12:22-64
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:13:2-75
+	android:name
+		ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:13:19-73
+uses-permission#android.permission.BLUETOOTH_ADMIN
+ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:14:5-74
+	android:name
+		ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:14:22-71
+uses-permission#android.permission.BLUETOOTH
+ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:15:2-65
+	android:name
+		ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:15:19-62
+application
+ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:17:5-40:17
+MERGED from [com.android.support:appcompat-v7:22.0.0] C:\Users\Jack\.gradle\caches\transforms-1\files-1.1\appcompat-v7-22.0.0.aar\df32c0d3ad43f67d91f68840b53e71d9\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:appcompat-v7:22.0.0] C:\Users\Jack\.gradle\caches\transforms-1\files-1.1\appcompat-v7-22.0.0.aar\df32c0d3ad43f67d91f68840b53e71d9\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\Jack\.gradle\caches\transforms-1\files-1.1\support-v4-22.0.0.aar\6a4db88a9adb9e0bd8c7ca9e95a5739a\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\Jack\.gradle\caches\transforms-1\files-1.1\support-v4-22.0.0.aar\6a4db88a9adb9e0bd8c7ca9e95a5739a\AndroidManifest.xml:22:5-20
+	android:label
+		ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:20:9-28
+	android:icon
+		ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:19:9-45
+	android:allowBackup
+		ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:18:9-35
+activity#com.gps.GpsActivity
+ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:21:9-29:20
+	android:label
+		ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:23:11-43
+	android:name
+		ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:22:11-45
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:25:13-28:29
+action#android.intent.action.MAIN
+ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:26:17-69
+	android:name
+		ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:26:25-66
+category#android.intent.category.LAUNCHER
+ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:27:17-77
+	android:name
+		ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:27:27-74
+activity#com.gps.Prefs
+ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:30:9-31:49
+	android:label
+		ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:31:14-46
+	android:name
+		ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:30:19-47
+activity#com.gps.OBDscanMainActivity
+ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:33:9-34:49
+	android:label
+		ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:34:14-46
+	android:name
+		ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:33:19-61
+activity#com.gps.DeviceListActivity
+ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:36:9-39:72
+	android:label
+		ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:37:19-56
+	android:textColor
+		ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:38:19-46
+	android:configChanges
+		ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:39:19-69
+	android:name
+		ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:36:19-60

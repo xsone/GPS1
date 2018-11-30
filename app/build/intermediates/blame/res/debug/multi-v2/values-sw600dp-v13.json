@@ -1,0 +1,26 @@
+{
+    "logs": [
+        {
+            "outputFile": "F:\\AndroidAppsJack\\GPS1\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-sw600dp-v13\\values-sw600dp-v13.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\Jack\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-22.0.0.aar\\df32c0d3ad43f67d91f68840b53e71d9\\res\\values-sw600dp-v13\\values.xml",
+                    "from": {
+                        "startLines": "4,5,8,11,12,13",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "280,350,645,929,1000,1068",
+                        "endColumns": "69,69,58,70,67,54",
+                        "endOffsets": "345,415,699,995,1063,1118"
+                    },
+                    "to": {
+                        "startLines": "2,3,4,5,6,7",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "55,125,195,254,325,393",
+                        "endColumns": "69,69,58,70,67,54",
+                        "endOffsets": "120,190,249,320,388,443"
+                    }
+                }
+            ]
+        }
+    ]
+}

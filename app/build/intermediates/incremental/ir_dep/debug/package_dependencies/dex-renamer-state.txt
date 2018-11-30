@@ -1,0 +1,4 @@
+#Sat Oct 06 21:27:15 CEST 2018
+base.0=F\:\\AndroidAppsJack\\GPS1\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\10
+path.0=classes.dex
+renamed.0=classes.dex

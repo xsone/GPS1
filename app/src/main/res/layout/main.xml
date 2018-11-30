@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+<TextView  
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content" 
+    android:text="@string/provider"
+    />
+<TextView  
+	android:id="@+id/Provider"     
+	android:layout_width="match_parent" 
+    android:layout_height="wrap_content" 
+    android:textSize="15.0sp"
+   	android:textColor="#00ff00"
+    />
+<TextView  
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content" 
+    android:text="@string/lat"
+    />
+<TextView  
+	android:id="@+id/Lat"     
+	android:layout_width="match_parent" 
+    android:layout_height="wrap_content" 
+    android:textSize="15.0sp"
+    android:textColor="#00ff00"
+    />
+<TextView  
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content" 
+    android:text="@string/lon"
+    />
+<TextView  
+	android:id="@+id/Lon"     
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content" 
+    android:textSize="15.0sp"
+    android:textColor="#00ff00"
+    />
+<TextView  
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content" 
+    android:text="@string/GpsSpeed"
+    />
+<TextView  
+	android:id="@+id/GpsSpeed"     
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content" 
+    android:textSize="15.0sp"
+    android:textColor="#00ff00"    
+    />
+<TextView  
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content" 
+    android:text="@string/ObdSpeed"
+    />
+<TextView  
+	android:id="@+id/ObdSpeed"     
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content" 
+    android:textSize="15.0sp"
+    android:textColor="#00ff00"    
+    />
+<TextView  
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content" 
+    android:text="@string/ObdRpm"
+    />
+<TextView  
+	android:id="@+id/ObdRpm"     
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content" 
+    android:textSize="15.0sp"
+    android:textColor="#00ff00"
+    />
+<TextView  
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content" 
+    android:text="@string/ObdCoolant"
+    />
+<TextView  
+	android:id="@+id/ObdCoolant"     
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content" 
+    android:textSize="15.0sp"
+    android:textColor="#00ff00"
+    />
+<TextView  
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content" 
+    android:text="@string/alt"
+    />
+<TextView  
+	android:id="@+id/Alt"     
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content" 
+    android:textSize="15.0sp"
+    android:textColor="#00ff00"
+    />
+
+<TextView  
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content" 
+    android:text="@string/date"
+    />
+<TextView  
+	android:id="@+id/Date"     
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content" 
+    android:textSize="15.0sp"
+    android:textColor="#00ff00"
+    />
+
+<!-- 
+<TextView  
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content" 
+    android:text="@string/time"
+    />
+<TextView  
+	android:id="@+id/Time"     
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content" 
+    android:textSize="15.0sp"
+    android:textColor="#00ff00"
+    />
+<TextView  
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content" 
+    android:text="@string/file"
+    />
+<TextView  
+	android:id="@+id/File"     
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content" 
+    android:textSize="15.0sp"
+    android:textColor="#00ff00"
+    />
+-->    
+<TextView  
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content" 
+    android:text="@string/display"
+    />
+  
+    <TextView
+    android:id="@+id/msgWindow"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:transcriptMode="alwaysScroll"
+    android:textSize="15.0sp"
+    android:textColor="#00ff00"
+    android:gravity="bottom"
+    />
+</LinearLayout>
