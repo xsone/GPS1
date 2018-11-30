@@ -446,7 +446,7 @@ public class GpsActivity extends Activity {
 		locationCriteria.setAccuracy(Criteria.ACCURACY_FINE);
         ProviderName = provider.getName();
         Date dateTime = new Date();
-		timeStamp = new SimpleDateFormat("dd MMMM yyyy HH:mm:ss").format(new Date());
+		timeStamp = new SimpleDateFormat("dd MMMM yyyy HH:mm:ss").format(new Date()); //GIT test 2
         DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getApplicationContext());
         root = Environment.getExternalStorageDirectory();
 		//Filename = dateFormat.format(dateTime) + timeFormat.format(dateTime)+ ".gpx";
