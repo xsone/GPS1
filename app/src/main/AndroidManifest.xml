@@ -3,10 +3,12 @@
       package="com.gps"
       android:versionCode="1"
       android:versionName="Testing" >
-    <uses-sdk android:targetSdkVersion="22"
-        />
+    <?uses-sdk android:targetSdkVersion="22"?>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -16,11 +18,11 @@
 	
     <application 
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher" 
-        android:label="gps" >
+        android:icon="@drawable/ic_launcher"
+        android:label="OBD | GPS | Trafficbox">
         <activity
           android:name="com.gps.GpsActivity"
-          android:label="@string/app_name" 
+            android:label="OBD | GPS | Trafficbox"
          > 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,8 +30,8 @@
             </intent-filter>
         </activity>    
         <activity android:name="com.gps.Prefs"
-         		  android:label="@string/app_name" /> 
-        
+            android:label="@string/app_name" />
+
         <activity android:name="com.gps.OBDscanMainActivity"
          		  android:label="@string/app_name" /> 
          		  

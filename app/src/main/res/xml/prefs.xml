@@ -2,96 +2,30 @@
     
    <PreferenceCategory
     android:title="Settings" >
-    
-     <EditTextPreference
-        android:key="mailadres"
-        android:title="Email"
-        android:summary="Send email"
-        android:dialogTitle="Voer email adres in"
-        android:dialogMessage="Voer een bericht in"
-        android:defaultValue="xsone2@gmail.com" 
-        android:inputType="textEmailAddress" 
-        />
-     
-     <EditTextPreference
-        android:key="phonenumber"
-        android:title="phonenumber"
-        android:summary="Send sms"
-        android:dialogTitle="Voer telefoonnummer in"
-        android:dialogMessage="Voer extra bericht in"
-        android:phoneNumber="true"
-        android:defaultValue="0649982176" 
-        android:inputType="phone" 
-        />
-     
-     <EditTextPreference
-        android:key="alarmwaarde"
-        android:title="AlarmWaarde"
-        android:summary="Alarmwaarde instellen"
-        android:dialogTitle="Voer AlarmWaarde"
-        android:dialogMessage="Voer waarde in"
-        android:defaultValue="50" 
-        android:inputType="numberDecimal" 
-        />
-     
-     <EditTextPreference
-        android:key="datafragment"
-        android:title="DataFragment"
-        android:summary="DataFragment instellen"
-        android:dialogTitle="Voer Waarde in"
-        android:dialogMessage="Voer waarde in"
-        android:defaultValue="1" 
-        android:inputType="numberDecimal" 
-        />
-     
-     <EditTextPreference
-        android:key="wachttijd"
-        android:title="WachtTijdText"
-        android:summary="WachtTijd alarm instellen"
-        android:dialogTitle="Voer tijd in sec"
-        android:dialogMessage="Voer sec waarde in"
-        android:defaultValue="1" 
-        android:inputType="numberDecimal" 
-        />
-   
- <!--       
-    <CheckBoxPreference 
-        android:key="mail"
-        android:title="@string/menu_email"
-        android:summary="@string/menu_email"
-        android:defaultValue="false" />
-    
-    <CheckBoxPreference
-        android:key="sms"
-        android:title="@string/menu_sms"
-        android:summary="@string/menu_sms"
-        android:defaultValue="false" />
-    
-    <CheckBoxPreference
-        android:key="sound"
-        android:title="@string/menu_sound"
-        android:summary="@string/menu_sound"
-        android:defaultValue="false" />
-    
-    <CheckBoxPreference
-        android:key="tweet"
-        android:title="@string/menu_twitter"
-        android:summary="@string/menu_twitter"
-        android:defaultValue="false" />
- 
-     <CheckBoxPreference
-        android:key="phonecall"
-        android:title="@string/menu_phonecall"
-        android:summary="@string/menu_phonecall"
-        android:defaultValue="false" />
-    
-    <CheckBoxPreference
-        android:key="log"
-        android:title="@string/menu_log"
-        android:summary="@string/menu_log"
-        android:defaultValue="false" />
-  -->
-    
+
+       <EditTextPreference
+           android:defaultValue="00:00:00:00:00:00"
+           android:dialogTitle="Enter BT MacAddress"
+           android:inputType="text"
+           android:key="btMacAddress"
+           android:phoneNumber="true"
+           android:summary="BT MacAddress"
+           android:title="BT MacAddress" />
+
+       <EditTextPreference
+           android:defaultValue="xsone2@gmail.com"
+           android:dialogTitle="Enter Email Address"
+           android:inputType="textEmailAddress"
+           android:key="emailaddress"
+           android:summary="Send alarm by email"
+           android:title="Email Address" />
+
+       <EditTextPreference
+           android:defaultValue="5"
+           android:dialogTitle="Enter interval (sec.)"
+           android:inputType="numberDecimal"
+           android:key="logInterval"
+           android:summary="Set log interval"
+           android:title="Set Log Interval GPS (sec.)" />
     </PreferenceCategory>
-  
  </PreferenceScreen>
