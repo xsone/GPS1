@@ -5906,6 +5906,5 @@ public final class R {
   }
   public static final class xml {
     public static final int prefs=0x7f0f0000;
-    public static final int settings=0x7f0f0001;
   }
 }

@@ -21,11 +21,19 @@
            android:title="Email Address" />
 
        <EditTextPreference
-           android:defaultValue="5"
-           android:dialogTitle="Enter interval (sec.)"
+           android:defaultValue="10"
+           android:dialogTitle="Enter interval GPS (sec.)"
            android:inputType="numberDecimal"
-           android:key="logInterval"
-           android:summary="Set log interval"
+           android:key="gpslogInterval"
+           android:summary="Set log interval GPS"
            android:title="Set Log Interval GPS (sec.)" />
+
+       <EditTextPreference
+           android:defaultValue="5"
+           android:dialogTitle="Enter interval OBD (sec.)"
+           android:inputType="numberDecimal"
+           android:key="obdlogInterval"
+           android:summary="Set log interval OBD"
+           android:title="Set Log Interval OBD (sec.)" />
     </PreferenceCategory>
  </PreferenceScreen>

@@ -82,7 +82,7 @@ MERGED from [com.android.support:support-v4:22.0.0] C:\Users\Jack\.gradle\caches
 activity#com.gps.GpsActivity
 ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:23:9-31:20
 	android:label
-		ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:25:11-49
+		ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:25:13-51
 	android:name
 		ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:24:11-45
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
@@ -96,9 +96,9 @@ ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:29:17-77
 	android:name
 		ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:29:27-74
 activity#com.gps.Prefs
-ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:32:9-33:49
+ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:32:9-33:48
 	android:label
-		ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:33:14-46
+		ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:33:13-45
 	android:name
 		ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:32:19-47
 activity#com.gps.OBDscanMainActivity

@@ -802,4 +802,3 @@ styleable Toolbar android_gravity android_minHeight collapseContentDescription c
 styleable View android_focusable paddingEnd paddingStart
 styleable ViewStubCompat android_id android_layout android_inflatedId
 xml prefs
-xml settings

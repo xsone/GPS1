@@ -67,13 +67,15 @@ public class GpsActivity extends Activity {
 	public LocationProvider provider;
 	public Integer Teller = 10;
 	public TextView tvGpsfile;
-	public Integer logIntervalInt = 10;
+	public Integer gpsLogIntervalInt = 10;
+	public Integer obdLogIntervalInt = 5;
 	
 	public Boolean isGPSEnabled = false;
 	public Boolean isNetworkEnabled = false;
 	
 	public String GpsSpeedValue = "0";
-	public String logIntervalString = "10";
+	public String gpsLogIntervalString = "10";
+	public String obdLogIntervalString = "5";
 
 	public int intObdRpm = 0;
 	public int intObdSpeed = 0;
@@ -187,10 +189,23 @@ public class GpsActivity extends Activity {
 					for (int x = 1; x < bytes.length; x++) {
 						//msgWindow.append("Bytes " + x + ":" + bytes[x] + "\n");
 						//msgWindow.append("Bytes 1: " + bytes[1] + "\n");
+
+						//tvObdSpeed.setText(intObdSpeed/4 + " Kmh");
+						//tvObdRpm.setText(intObdRpm + " RPM");
+						//tvObdCoolant.setText(intObdCoolant-40 + " C");
+						//public String strObdCoolant = "05";
+						//public String strObdSpeed = "0D";
+						//public String strObdRpm = "0C";
+						//public String strObdEngineLoad = "04";
+						//public String strObdTrottlePos = "11";
+						//public String strObdAbsLoad = "43";
+						//public String strObdAmbientAir = "46";
+						//public String strObdOilTemp = "5C";
+
 						if (bytes[1].length() == 2) {
 							if (bytes[1].trim().equals(strObdSpeed))
 								intObdSpeed = Integer.valueOf(bytes[2].trim(), 16); //PID waarde
-							tvObdSpeed.setText(intObdSpeed + " Kmh");
+							tvObdSpeed.setText(intObdSpeed/4 + " Kmh");
 
 							if (bytes[1].trim().equals(strObdRpm))
 								intObdRpm = (Integer.valueOf(bytes[2].trim(), 16) + Integer.valueOf(bytes[3].trim(), 16)) / 4; //PID waarde
@@ -198,27 +213,27 @@ public class GpsActivity extends Activity {
 
 							if (bytes[1].trim().equals(strObdCoolant))
 								intObdCoolant = (Integer.valueOf(bytes[2].trim(), 16)) - 40; //PID waarde
-							tvObdCoolant.setText(intObdCoolant + " C");
+							tvObdCoolant.setText(intObdCoolant-40 + " C");
 
 							if (bytes[1].trim().equals(strObdEngineLoad))
 								intObdEngineLoad = Integer.valueOf(bytes[2].trim(), 16); //PID waarde
-							tvObdEngineLoad.setText(intObdEngineLoad + " %");
+							tvObdEngineLoad.setText((intObdEngineLoad*100)/255 + " %");
 
 							if (bytes[1].trim().equals(strObdTrottlePos))
 								intObdTrottlePos = Integer.valueOf(bytes[2].trim(), 16); //PID waarde
-							tvObdTrottlePos.setText(intObdTrottlePos + " %");
+							tvObdTrottlePos.setText((intObdTrottlePos*100)/255 + " %");
 
 							if (bytes[1].trim().equals(strObdAbsLoad))
-								intObdAbsLoad = Integer.valueOf(bytes[2].trim(), 16); //PID waarde
+								intObdAbsLoad = (100*(256*Integer.valueOf(bytes[2].trim(), 16) + Integer.valueOf(bytes[3].trim(), 16))) / 255; //PID waarde
 							tvObdAbsLoad.setText(intObdAbsLoad + " %");
 
 							if (bytes[1].trim().equals(strObdAmbientAir))
 								intObdAmbientAir = Integer.valueOf(bytes[2].trim(), 16); //PID waarde
-							tvObdAmbientAir.setText(intObdAmbientAir + " C");
+							tvObdAmbientAir.setText(intObdAmbientAir-40 + " C");
 
 							if (bytes[1].trim().equals(strObdOilTemp))
 								intObdOilTemp = Integer.valueOf(bytes[2].trim(), 16); //PID waarde
-							tvObdOilTemp.setText(intObdOilTemp + " C");
+							tvObdOilTemp.setText(intObdOilTemp-40 + " C");
 
 							if (bytes[1].trim().equals(strObdFuelLevel))
 								intObdFuelLevel = Integer.valueOf(bytes[2].trim(), 16); //PID waarde
@@ -350,12 +365,14 @@ public class GpsActivity extends Activity {
 
         SharedPreferences myPreference=PreferenceManager.getDefaultSharedPreferences(this);
 	    SharedPreferences.Editor myPreferenceEditor = myPreference.edit();
-        logIntervalString =  myPreference.getString("loginterval",logIntervalString);
-		//myPreferenceEditor.putString("logInterval", logIntervalString).commit();
-	    logIntervalInt = Integer.parseInt(logIntervalString);
+        gpsLogIntervalString =  myPreference.getString("gpsloginterval",gpsLogIntervalString);
+	    gpsLogIntervalInt = Integer.parseInt(gpsLogIntervalString);
+		obdLogIntervalString =  myPreference.getString("obdloginterval",obdLogIntervalString);
+		obdLogIntervalInt = Integer.parseInt(obdLogIntervalString);
 		btMacAddress = myPreference.getString("btMacAddress", btMacAddress);
 	    myPreferenceEditor.putString("btMacAddress", btMacAddress).commit();//test
-		Toast.makeText(this, "Loginterval: " + logIntervalString, Toast.LENGTH_LONG).show(); //test
+		Toast.makeText(this, "gpsLoginterval: " + gpsLogIntervalString, Toast.LENGTH_LONG).show(); //test
+		Toast.makeText(this, "obdLoginterval: " + obdLogIntervalString, Toast.LENGTH_LONG).show(); //test
 		Toast.makeText(this, "BT-Address: " + btMacAddress, Toast.LENGTH_LONG).show(); //test
 
 		// Get local Bluetooth adapter
@@ -399,7 +416,7 @@ public class GpsActivity extends Activity {
                     locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
                                 //60000, // 1min
                                 //30000, // 1/2min
-                                logIntervalInt*1000,
+                                gpsLogIntervalInt*1000,
                                 //1,   // 10m
                                 0,
                                 locationListener);
@@ -422,7 +439,7 @@ public class GpsActivity extends Activity {
 							locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
 									//60000, // 1min
 									//30000, // 1/2 min (werkte)
-									logIntervalInt * 1000,
+									gpsLogIntervalInt * 1000,
 									//1,   // 10m
 									0,
 									locationListener);
@@ -515,21 +532,26 @@ public class GpsActivity extends Activity {
 		return true;
 	}
 
+
 	@Override
 	public void onResume() {
 		super.onResume();
 		SharedPreferences myPreference = PreferenceManager.getDefaultSharedPreferences(this);
 		SharedPreferences.Editor myPreferenceEditor = myPreference.edit();
-		logIntervalString = myPreference.getString("logInterval", logIntervalString);
-		myPreferenceEditor.putString("logInterval", logIntervalString).commit();
-		logIntervalInt = Integer.parseInt(logIntervalString);
+		gpsLogIntervalString = myPreference.getString("gpslogInterval", gpsLogIntervalString);
+		//myPreferenceEditor.putString("logInterval", logIntervalString).commit();
+		gpsLogIntervalInt = Integer.parseInt(gpsLogIntervalString);
+		obdLogIntervalString = myPreference.getString("obdlogInterval", obdLogIntervalString);
+		//myPreferenceEditor.putString("logInterval", logIntervalString).commit();
+		obdLogIntervalInt = Integer.parseInt(obdLogIntervalString);
 		btMacAddress = myPreference.getString("btMacAddress", btMacAddress);
 		myPreferenceEditor.putString("btMacAddress", btMacAddress).commit();//test
-		Toast.makeText(this, "Loginterval: " + logIntervalString, Toast.LENGTH_LONG).show(); //test
+		Toast.makeText(this, "gpsLoginterval: " + gpsLogIntervalString, Toast.LENGTH_LONG).show(); //test
+		Toast.makeText(this, "obdLoginterval: " + obdLogIntervalString, Toast.LENGTH_LONG).show(); //test
 		Toast.makeText(this, "BT-Address: " + btMacAddress, Toast.LENGTH_LONG).show(); //test
 		obdRun();
 	}
-    
+
     /*-------------------------------------------
      OBD gedeelte............................. 
      Verhuizen naar een aparte class maar weet niet hoe dat moet.
@@ -795,7 +817,7 @@ public class GpsActivity extends Activity {
 					}
 				});
 			}
-		}, 0, logIntervalInt * 1000); // updates each 1 secs
+		}, 0, obdLogIntervalInt * 1000); // updates each 1 secs
 	}
 		//Decodeer de OBD berichten
 		public void ObdDecode()
