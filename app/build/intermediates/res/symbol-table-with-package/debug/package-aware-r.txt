@@ -357,6 +357,7 @@ drawable abc_textfield_search_material
 drawable ic_launcher
 id Alt
 id Date
+id Filename
 id GpsSpeed
 id Lat
 id Lon
@@ -370,6 +371,7 @@ id ObdRpm
 id ObdSpeed
 id ObdTrottlePos
 id Provider
+id Time
 id action_bar
 id action_bar_activity_content
 id action_bar_container

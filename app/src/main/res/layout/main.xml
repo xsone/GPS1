@@ -276,47 +276,59 @@
             android:textSize="15.0sp" />
     </LinearLayout>
 
-<!-- 
-<TextView  
-    android:layout_width="match_parent" 
-    android:layout_height="wrap_content" 
-    android:text="@string/time"
-    />
-<TextView  
-	android:id="@+id/Time"     
-    android:layout_width="match_parent" 
-    android:layout_height="wrap_content" 
-    android:textSize="15.0sp"
-    android:textColor="#00ff00"
-    />
-<TextView  
-    android:layout_width="match_parent" 
-    android:layout_height="wrap_content" 
-    android:text="@string/file"
-    />
-<TextView  
-	android:id="@+id/File"     
-    android:layout_width="match_parent" 
-    android:layout_height="wrap_content" 
-    android:textSize="15.0sp"
-    android:textColor="#00ff00"
-    />
--->    
-<TextView  
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="DATA STREAM"
-    android:textColor="@color/blue"
-    />
-  
-    <TextView
-    android:id="@+id/msgWindow"
+    <LinearLayout
         android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-        android:maxLines="500"
-    android:transcriptMode="alwaysScroll"
-    android:textSize="15.0sp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Filename: "
+        />
+
+        <TextView
+            android:id="@+id/Filename"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15.0sp"
+            android:textColor="#00ff00"
+         />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Timestamp: " />
+
+        <TextView
+            android:id="@+id/Time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#00ff00"
+            android:textSize="15.0sp" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="DATA STREAM"
         android:textColor="@color/blue"
-    android:gravity="bottom"
-    />
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/msgWindow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="500"
+        android:transcriptMode="alwaysScroll"
+        android:textSize="15.0sp"
+        android:textColor="@color/blue"
+        android:gravity="bottom"
+        android:text="" />
 </LinearLayout>
