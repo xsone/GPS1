@@ -41,7 +41,7 @@ import static android.webkit.ConsoleMessage.MessageLevel.LOG;
 public class GpsActivity extends Activity {
 	private static final String TAG = "OBD | GPS ";
 	/**
-	 * The LocationListener shows the most recent data with every call of onLocationChanged()
+	 * The LocationListener shows the most recent data with every call of onLocationChanged() test
 	 */
 	private final LocationListener locationListener;
 	public TextView tvMsgWindow;
