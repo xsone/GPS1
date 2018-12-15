@@ -32,6 +32,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -271,7 +272,8 @@ public class GpsActivity extends Activity {
 					tvAlt.setText(String.format("%.2f", location.getAltitude()));
                     SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy HH:mm:ss");
                     String formatted = sdf.format(new Date(location.getTime()));
-					tvTimestamp.setText(formatted);
+					//tvTimestamp.setText(formatted);
+                    tvTimestamp.setText(timestamp());
 					GpsSpeedValue = Integer.toString((int) (location.getSpeed() * 3600) / 1000); //omwerken van m/s naar km/h
 					tvGpsSpeed.setText(GpsSpeedValue + "  KMh");
 					tvObdSpeed.setText(intObdSpeed + " Kmh");
@@ -301,7 +303,8 @@ public class GpsActivity extends Activity {
 						if (gpxFiles.canWrite()) {
 							outWpt.write("<wpt lat='" + tvLat.getText() + "' lon='" + tvLong.getText() + "'>\n" +
 									"<name>" + GpsSpeedValue + "kmh|" + intObdSpeed + "kmh|" + intObdRpm + "rpm|" + intObdCoolant + "deg|" + intObdTrottlePos + "%" + "</name>\n" +
-									"<time>" + timeStamp + "</time>\n" +
+									//"<time>" + timeStamp + "</time>\n" +
+									"<time>" + timestamp() + "</time>\n" +
 									"<sym>" + "triangle" + "</sym>\n" +
 									"</wpt>\n");
 
@@ -500,6 +503,14 @@ public class GpsActivity extends Activity {
 		}
 	}
 
+	protected static String timestamp(){
+		Calendar c = Calendar.getInstance();
+		SimpleDateFormat dateformat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+		String datetime = dateformat.format(c.getTime());
+		return datetime;
+	}
+
+
 	@Override
 	/** The menu with 'Exit' is generated only*/
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -512,11 +523,6 @@ public class GpsActivity extends Activity {
 	//@Override
 	public void onStart() {
 		super.onStart();
-		SharedPreferences myPreference = PreferenceManager.getDefaultSharedPreferences(this);
-		SharedPreferences.Editor myPreferenceEditor = myPreference.edit();
-		obdLogIntervalString =myPreference.getString("obdloginterval",obdLogIntervalString);
-		myPreferenceEditor.putString("obdlogInterval",obdLogIntervalString).commit();
-		obdLogIntervalInt =Integer.parseInt(obdLogIntervalString);
 		obdRun();
 	}
 
@@ -524,10 +530,15 @@ public class GpsActivity extends Activity {
 	//@Override
 	public void onPause() {
 		super.onPause();
-		obdRun();
-		//Toast.makeText(this, " BT Pause Keep BT-Service", Toast.LENGTH_LONG).show();
+		//SharedPreferences myPreference = PreferenceManager.getDefaultSharedPreferences(this);
+		//SharedPreferences.Editor myPreferenceEditor = myPreference.edit();
+		//obdLogIntervalString =myPreference.getString("obdloginterval",obdLogIntervalString);
+		//myPreferenceEditor.putString("obdlogInterval",obdLogIntervalString).commit();
+		//Toast.makeText(this, "obdLoginterval: " + obdLogIntervalString, Toast.LENGTH_LONG).show(); //test
+		//obdLogIntervalInt =Integer.parseInt(obdLogIntervalString);
 		//btDevice = mBluetoothAdapter.getRemoteDevice(btMacAddress); //direct verbinden met
 		//mChatService.connect(btDevice, true);
+		obdRun();
 	}
 
 	@Override
@@ -535,17 +546,11 @@ public class GpsActivity extends Activity {
 		super.onStop();
 		Toast.makeText(this, "BT-Address: " + btMacAddress, Toast.LENGTH_LONG).show(); //test
 		obdRun();
-		//Toast.makeText(this, " BT Stop Keep BT-Service", Toast.LENGTH_LONG).show();
-		//btDevice = mBluetoothAdapter.getRemoteDevice(btMacAddress); //direct verbinden met
-		//mChatService.connect(btDevice, true);
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
-		//Toast.makeText(this, " BT Resume Keep BT-Service", Toast.LENGTH_LONG).show();
-		//btDevice = mBluetoothAdapter.getRemoteDevice(btMacAddress); //direct verbinden met
-		//mChatService.connect(btDevice, true);
 		obdRun();
 	}
 
@@ -584,14 +589,7 @@ public class GpsActivity extends Activity {
 			return true;
         case R.id.menu_settings:
         		 	 startActivity(new Intent(this, Prefs.class));
-                        SharedPreferences myPreference = PreferenceManager.getDefaultSharedPreferences(this);
-                        SharedPreferences.Editor myPreferenceEditor = myPreference.edit();
-                        obdLogIntervalString =myPreference.getString("obdloginterval",obdLogIntervalString);
-                        myPreferenceEditor.putString("obdlogInterval",obdLogIntervalString).commit();
-                        obdLogIntervalInt =Integer.parseInt(obdLogIntervalString);
-                        obdRun();
-        		 	    Toast.makeText(getBaseContext(), "Settings changed", Toast.LENGTH_SHORT).show();
-	    		 	 break;
+                 	 break;
        	case R.id.menu_write_file:
     			 try {
     				outWpt.write("</gpx>\n");
@@ -721,39 +719,39 @@ public class GpsActivity extends Activity {
 						switch (Teller) {
 							case 0:
 								tvMsgWindow.append("\n" + "ATZ: reset all " + Teller + "\n");
-									sendMessage("ATZ" + "\r"); //Test geeft OK
+								//sendMessage("ATZ" + "\r"); //Test geeft OK
 								break;
 							case 1:
 								tvMsgWindow.append("\n" + "ATE1: echo on " + Teller + "\n");
-								sendMessage("ATE1" + "\r"); //Echo on
+								//sendMessage("ATE1" + "\r"); //Echo on
 								break;
 							case 2:
 								tvMsgWindow.append("\n" + "AT@1: dev. descr. " + Teller + "\n");
-								sendMessage("AT@1" + "\r"); //Protocol geeft?
+								//sendMessage("AT@1" + "\r"); //Protocol geeft?
 								break;
 							case 3:
 								tvMsgWindow.append("\n" + "ATSP0: prot. auto " + Teller + "\n");
-								sendMessage("ATSP0" + "\r"); //Protocol geeft AUTO
+								//sendMessage("ATSP0" + "\r"); //Protocol geeft AUTO
 								break;
 							case 4:
 								tvMsgWindow.append("\n" + "ATDP: display prot." + Teller + "\n");
-									sendMessage("ATDP" + "\r"); //Buffer Dump
+								//sendMessage("ATDP" + "\r"); //Buffer Dump
 								break;
 							case 5:
 								tvMsgWindow.append("\n" + "ATDPN: prot. number " + Teller + "\n");
-								sendMessage("ATDPN" + "\r"); //
+								//sendMessage("ATDPN" + "\r"); //
 								break;
 							case 6:
 								tvMsgWindow.append("\n" + "ATBD: buffer dump " + Teller + "\n");
-								sendMessage("ATBD" + "\r"); //S
+								//sendMessage("ATBD" + "\r"); //S
 								break;
 							case 7:
 								tvMsgWindow.append("\n" + "ATRD: read stored data " + Teller + "\n");
-									sendMessage("ATRD" + "\r"); //SPEED
+								//sendMessage("ATRD" + "\r"); //SPEED
 								break;
 							case 8:
 								tvMsgWindow.append("\n" + "ATRV: voltage " + Teller + "\n");
-									sendMessage("ATRV" + "\r"); //SPEED
+								//sendMessage("ATRV" + "\r"); //SPEED
 								break;
 							case 9:
 								tvMsgWindow.append("\n" + "RPM: toeren " + Teller + "\n");
@@ -793,24 +791,24 @@ public class GpsActivity extends Activity {
 								break;
 							case 18:
 								tvMsgWindow.append("\n" + "ATCS: CAN status " + Teller + "\n");
-									sendMessage("ATCS" + "\r"); //SPEED
+								//sendMessage("ATCS" + "\r"); //SPEED
 								break;
 							case 19:
 								tvMsgWindow.append("\n" + "ATCAF1: CAN auto form." + Teller + "\n");
-									sendMessage("ATCAF1" + "\r"); //SPEED
+								//sendMessage("ATCAF1" + "\r"); //SPEED
 								break;
 							case 20:
 								tvMsgWindow.append("\n" + "ATCFC1: CAN flow on " + Teller + "\n");
-									sendMessage("ATCFC1" + "\r"); //SPEED
+								//sendMessage("ATCFC1" + "\r"); //SPEED
 								break;
 							case 21:
 								tvMsgWindow.append("\n" + "ATAL: long msg." + Teller + "\n");
-									sendMessage("ATAL" + "\r"); //SPEED
+								//sendMessage("ATAL" + "\r"); //SPEED
 								break;
 							case 22:
 								tvMsgWindow.append("\n" + "ATMA: monitor all" + Teller + "\n");
-									sendMessage("ATMA" + "\r"); //SPEED
-									break;
+								//sendMessage("ATMA" + "\r"); //SPEED
+								break;
 							default: Teller = 0;
 								break;
 						}
