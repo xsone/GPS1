@@ -1,14 +1,14 @@
 -- Merging decision tree log ---
 manifest
-ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:2:1-43:12
-INJECTED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:2:1-43:12
-INJECTED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:2:1-43:12
-INJECTED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:2:1-43:12
-MERGED from [com.android.support:appcompat-v7:22.0.0] C:\Users\Jack\.gradle\caches\transforms-1\files-1.1\appcompat-v7-22.0.0.aar\7429d3b642db2f2acaa6f26bc8a5af03\AndroidManifest.xml:17:1-24:12
-MERGED from [com.android.support:support-v4:22.0.0] C:\Users\Jack\.gradle\caches\transforms-1\files-1.1\support-v4-22.0.0.aar\bf34e3c561f25cefcfa4ac6fba0402e6\AndroidManifest.xml:17:1-24:12
-INJECTED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:2:1-43:12
-INJECTED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:2:1-43:12
-INJECTED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:2:1-43:12
+ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:2:1-40:12
+INJECTED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:2:1-40:12
+INJECTED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:2:1-40:12
+INJECTED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:2:1-40:12
+MERGED from [com.android.support:appcompat-v7:22.0.0] C:\Users\Jack\.gradle\caches\transforms-1\files-1.1\appcompat-v7-22.0.0.aar\0594cbe44be7f929c2b78c7d4f4f8ec7\AndroidManifest.xml:17:1-24:12
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\Jack\.gradle\caches\transforms-1\files-1.1\support-v4-22.0.0.aar\4a6c2c75c9d029dffea6235ffa938122\AndroidManifest.xml:17:1-24:12
+INJECTED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:2:1-40:12
+INJECTED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:2:1-40:12
+INJECTED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:2:1-40:12
 	package
 		ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:3:7-24
 		INJECTED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml
@@ -24,7 +24,7 @@ INJECTED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:2:1-43:12
 		INJECTED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml
 		INJECTED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml
 uses-permission#android.permission.ACCESS_FINE_LOCATION
-ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:7:5-95
+ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:7:5-79
 	android:name
 		ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:7:22-76
 uses-permission#android.permission.ACCESS_COARSE_LOCATION
@@ -48,7 +48,7 @@ ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:12:5-75
 	android:name
 		ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:12:22-72
 uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
-ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:13:5-97
+ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:13:5-81
 	android:name
 		ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:13:22-78
 uses-permission#android.permission.INTERNET
@@ -64,15 +64,15 @@ ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:16:5-74
 	android:name
 		ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:16:22-71
 uses-permission#android.permission.BLUETOOTH
-ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:17:2-65
+ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:17:5-68
 	android:name
-		ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:17:19-62
+		ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:17:22-65
 application
-ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:19:5-42:17
-MERGED from [com.android.support:appcompat-v7:22.0.0] C:\Users\Jack\.gradle\caches\transforms-1\files-1.1\appcompat-v7-22.0.0.aar\7429d3b642db2f2acaa6f26bc8a5af03\AndroidManifest.xml:22:5-20
-MERGED from [com.android.support:appcompat-v7:22.0.0] C:\Users\Jack\.gradle\caches\transforms-1\files-1.1\appcompat-v7-22.0.0.aar\7429d3b642db2f2acaa6f26bc8a5af03\AndroidManifest.xml:22:5-20
-MERGED from [com.android.support:support-v4:22.0.0] C:\Users\Jack\.gradle\caches\transforms-1\files-1.1\support-v4-22.0.0.aar\bf34e3c561f25cefcfa4ac6fba0402e6\AndroidManifest.xml:22:5-20
-MERGED from [com.android.support:support-v4:22.0.0] C:\Users\Jack\.gradle\caches\transforms-1\files-1.1\support-v4-22.0.0.aar\bf34e3c561f25cefcfa4ac6fba0402e6\AndroidManifest.xml:22:5-20
+ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:19:5-39:17
+MERGED from [com.android.support:appcompat-v7:22.0.0] C:\Users\Jack\.gradle\caches\transforms-1\files-1.1\appcompat-v7-22.0.0.aar\0594cbe44be7f929c2b78c7d4f4f8ec7\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:appcompat-v7:22.0.0] C:\Users\Jack\.gradle\caches\transforms-1\files-1.1\appcompat-v7-22.0.0.aar\0594cbe44be7f929c2b78c7d4f4f8ec7\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\Jack\.gradle\caches\transforms-1\files-1.1\support-v4-22.0.0.aar\4a6c2c75c9d029dffea6235ffa938122\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\Jack\.gradle\caches\transforms-1\files-1.1\support-v4-22.0.0.aar\4a6c2c75c9d029dffea6235ffa938122\AndroidManifest.xml:22:5-20
 	android:label
 		ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:22:9-47
 	android:icon
@@ -101,30 +101,24 @@ ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:32:9-33:48
 		ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:33:13-45
 	android:name
 		ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:32:19-47
-activity#com.gps.OBDscanMainActivity
-ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:35:9-36:49
-	android:label
-		ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:36:14-46
-	android:name
-		ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:35:19-61
 activity#com.gps.DeviceListActivity
-ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:38:9-41:72
+ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:35:9-38:72
 	android:label
-		ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:39:19-56
+		ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:36:19-56
 	android:textColor
-		ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:40:19-46
+		ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:37:19-46
 	android:configChanges
-		ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:41:19-69
+		ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:38:19-69
 	android:name
-		ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:38:19-60
+		ADDED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml:35:19-60
 uses-sdk
 INJECTED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml
 INJECTED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml
-MERGED from [com.android.support:appcompat-v7:22.0.0] C:\Users\Jack\.gradle\caches\transforms-1\files-1.1\appcompat-v7-22.0.0.aar\7429d3b642db2f2acaa6f26bc8a5af03\AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:appcompat-v7:22.0.0] C:\Users\Jack\.gradle\caches\transforms-1\files-1.1\appcompat-v7-22.0.0.aar\7429d3b642db2f2acaa6f26bc8a5af03\AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:support-v4:22.0.0] C:\Users\Jack\.gradle\caches\transforms-1\files-1.1\support-v4-22.0.0.aar\bf34e3c561f25cefcfa4ac6fba0402e6\AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:support-v4:22.0.0] C:\Users\Jack\.gradle\caches\transforms-1\files-1.1\support-v4-22.0.0.aar\bf34e3c561f25cefcfa4ac6fba0402e6\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:appcompat-v7:22.0.0] C:\Users\Jack\.gradle\caches\transforms-1\files-1.1\appcompat-v7-22.0.0.aar\0594cbe44be7f929c2b78c7d4f4f8ec7\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:appcompat-v7:22.0.0] C:\Users\Jack\.gradle\caches\transforms-1\files-1.1\appcompat-v7-22.0.0.aar\0594cbe44be7f929c2b78c7d4f4f8ec7\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\Jack\.gradle\caches\transforms-1\files-1.1\support-v4-22.0.0.aar\4a6c2c75c9d029dffea6235ffa938122\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\Jack\.gradle\caches\transforms-1\files-1.1\support-v4-22.0.0.aar\4a6c2c75c9d029dffea6235ffa938122\AndroidManifest.xml:20:5-43
 INJECTED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml
 INJECTED from F:\AndroidAppsJack\GPS1\app\src\main\AndroidManifest.xml
 	android:targetSdkVersion

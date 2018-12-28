@@ -22,22 +22,24 @@ import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.DateFormat;
+import java.io.SequenceInputStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import static android.webkit.ConsoleMessage.MessageLevel.LOG;
 
 public class GpsActivity extends Activity {
 	private static final String TAG = "OBD | GPS ";
@@ -67,23 +69,43 @@ public class GpsActivity extends Activity {
 
 	public String FilenameWpt;
 	public String FilenameTrkpt;
+	// Message types sent from the BluetoothChatService Handler
+	public static final int MESSAGE_STATE_CHANGE = 1;
+	public static final int MESSAGE_READ = 2;
+	public static final int MESSAGE_WRITE = 3;
+	public static final int MESSAGE_DEVICE_NAME = 4;
+	public static final int MESSAGE_TOAST = 5;
+	public static final int MESSAGE_ERROR = 6;
+	public static final int MESSAGE_LOST = 7;
+	// Key names received from the BluetoothChatService Handler
+	public static final String DEVICE_NAME = "device_name";
+	public static final String TOAST = "toast";
+	// Intent request codes
+	private static final int REQUEST_CONNECT_DEVICE_SECURE = 1;
+	private static final int REQUEST_CONNECT_DEVICE_INSECURE = 2;
+	private static final int REQUEST_ENABLE_BT = 3;
+	public static Criteria criteria;
+	// Local Bluetooth adapter
+	static BluetoothAdapter mBluetoothAdapter = null;
+	//static DeviceListActivity mBTMacAddress = null;
+	// String buffer for outgoing messages
+	private static StringBuffer mOutStringBuffer;
+	// String buffer for incoming messages
+	private static StringBuffer mInStringBuffer;
+	// Member object for the chat services
+	private static BluetoothChatService mChatService = null;
 	public String ProviderName;
 	public String[] providers = {"network", "gps", "passive"};
-	public static Criteria criteria;
 	public Location location;
 	public LocationProvider provider;
 	public Integer Teller = 10;
-
 	public Integer gpsLogIntervalInt = 10;
 	public Integer obdLogIntervalInt = 5;
-
 	public Boolean isGPSEnabled = false;
 	public Boolean isNetworkEnabled = false;
-
 	public String GpsSpeedValue = "0";
 	public String gpsLogIntervalString = "10";
 	public String obdLogIntervalString = "5";
-
 	public int intObdRpm = 0;
 	public int intObdSpeed = 0;
 	public int intObdCoolant = 0;
@@ -95,7 +117,6 @@ public class GpsActivity extends Activity {
 	public int intObdOilTemp = 0;
 	public int intObdFuelLevel = 0;
 	public int intObdPID = 0;
-
 	public String strObdCoolant = "05";
 	public String strObdSpeed = "0D";
 	public String strObdRpm = "0C";
@@ -105,62 +126,28 @@ public class GpsActivity extends Activity {
 	public String strObdAmbientAir = "46";
 	public String strObdOilTemp = "5C";
 	public String strObdFuelLevel = "2F";
-
 	public String readValue = "";
 	public String[] ObdBytes;
 	public Timer autoUpdate;
-
 	public File gpxWptFile;
 	public File gpxTrkptFile;
-
-	FileWriter writerWpt;
-	BufferedWriter outWpt;
-	FileWriter writerTrkpnt;
-	BufferedWriter outTrkpnt;
-	File root;
-	File gpxFiles;
-
-
+	public String FilenameWptTrkpt;
 	//public String btMacAddress = "00:12:12:04:10:57";
 	public String btMacAddress = "00:00:00:00:00:00";
 	public BluetoothDevice btDevice;
 	public BluetoothSocket bluetoothSocket;
+	public File gpxWptTrkptFile;
+	public File gpxFiles;
+	FileWriter writerWpt;
+	BufferedWriter outWpt;
+	FileWriter writerTrkpnt;
 	boolean btSecure;
-
+	BufferedWriter outTrkpnt;
 	// Name of the connected device
 	private String mConnectedDeviceName = null;
 	// Array adapter for the conversation thread
 	private ArrayAdapter<String> mConversationArrayAdapter;
-	// String buffer for outgoing messages
-	private static StringBuffer mOutStringBuffer;
-	// String buffer for incoming messages
-	private static StringBuffer mInStringBuffer;
-	// Local Bluetooth adapter
-	static BluetoothAdapter mBluetoothAdapter = null;
-	// Member object for the chat services
-	private static BluetoothChatService mChatService = null;
-	static DeviceListActivity mBTMacAddress = null;
-
-	// Intent request codes
-	private static final int REQUEST_CONNECT_DEVICE_SECURE = 1;
-	private static final int REQUEST_CONNECT_DEVICE_INSECURE = 2;
-	private static final int REQUEST_ENABLE_BT = 3;
-
-	// Message types sent from the BluetoothChatService Handler
-	public static final int MESSAGE_STATE_CHANGE = 1;
-	public static final int MESSAGE_READ = 2;
-	public static final int MESSAGE_WRITE = 3;
-	public static final int MESSAGE_DEVICE_NAME = 4;
-	public static final int MESSAGE_TOAST = 5;
-	public static final int MESSAGE_ERROR = 6;
-	public static final int MESSAGE_LOST = 7;
-
-	// Key names received from the BluetoothChatService Handler
-	public static final String DEVICE_NAME = "device_name";
-	public static final String TOAST = "toast";
-
-	// Member object for the OBDscanMainActivity.java
-	private static OBDscanMainActivity mObdService = null;
+	//private static OBDscanMainActivity mObdService = null;
 	private final Handler mHandler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
@@ -202,7 +189,7 @@ public class GpsActivity extends Activity {
 							tvObdSpeed.setText(intObdSpeed + " Kmh");
 
 							if (bytes[1].trim().equals(strObdRpm))
-								intObdRpm = (Integer.valueOf(bytes[2].trim(), 16) + Integer.valueOf(bytes[3].trim(), 16)) / 4; //PID waarde
+								intObdRpm = (256 * (Integer.valueOf(bytes[2].trim(), 16) + Integer.valueOf(bytes[3].trim(), 16))) / 4; //PID waarde
 							tvObdRpm.setText(intObdRpm  + " RPM");
 
 							if (bytes[1].trim().equals(strObdCoolant))
@@ -222,11 +209,11 @@ public class GpsActivity extends Activity {
 							tvObdAbsLoad.setText(intObdAbsLoad + " %");
 
 							if (bytes[1].trim().equals(strObdAmbientAir))
-								intObdAmbientAir = Integer.valueOf(bytes[2].trim(), 16); //PID waarde
+								intObdAmbientAir = (Integer.valueOf(bytes[2].trim(), 16)) - 40; //PID waarde
 							tvObdAmbientAir.setText(intObdAmbientAir + " C");
 
 							if (bytes[1].trim().equals(strObdOilTemp))
-								intObdOilTemp = Integer.valueOf(bytes[2].trim(), 16); //PID waarde
+								intObdOilTemp = (Integer.valueOf(bytes[2].trim(), 16)) - 40; //PID waarde
 							tvObdOilTemp.setText(intObdOilTemp + " C");
 
 							if (bytes[1].trim().equals(strObdFuelLevel))
@@ -234,8 +221,8 @@ public class GpsActivity extends Activity {
 							tvObdFuelLevel.setText(intObdFuelLevel + " %");
 						}
 					} // end for
-					readMessage = "";
-					readBuf = null;
+					//readMessage = "";
+					//readBuf = null;
 					//LogWriter.write_info(readMessage);
 					break;
 				case MESSAGE_DEVICE_NAME:
@@ -251,6 +238,9 @@ public class GpsActivity extends Activity {
 				case MESSAGE_ERROR:
 					break;
 				case MESSAGE_LOST:
+					Toast.makeText(getApplicationContext(), "BT connection Lost", Toast.LENGTH_SHORT).show();
+					btDevice = mBluetoothAdapter.getRemoteDevice(btMacAddress);
+					mChatService.connect(btDevice, btSecure);
 					//	    if(Constant.DEBUG)  Log.d(TAG, "Connection lost");
 					//	    stopBTService(); //stop the Bluetooth services
 					//	    Thread.sleep(500);
@@ -259,7 +249,6 @@ public class GpsActivity extends Activity {
 			}
 		}
 	};
-
 
 	{
 		locationListener = new LocationListener() {
@@ -271,9 +260,8 @@ public class GpsActivity extends Activity {
 					tvLat.setText(Double.toString(location.getLatitude()));
 					tvAlt.setText(String.format("%.2f", location.getAltitude()));
                     SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy HH:mm:ss");
-                    String formatted = sdf.format(new Date(location.getTime()));
-					//tvTimestamp.setText(formatted);
                     tvTimestamp.setText(timestamp());
+					timeStamp = timestamp();
 					GpsSpeedValue = Integer.toString((int) (location.getSpeed() * 3600) / 1000); //omwerken van m/s naar km/h
 					tvGpsSpeed.setText(GpsSpeedValue + "  KMh");
 					tvObdSpeed.setText(intObdSpeed + " Kmh");
@@ -285,16 +273,10 @@ public class GpsActivity extends Activity {
 					tvObdAmbientAir.setText(intObdAmbientAir + " C");
 					tvObdOilTemp.setText(intObdOilTemp + " C");
 					tvObdFuelLevel.setText(intObdFuelLevel + " %");
-
-
-
 				} else {
 					Toast.makeText(getBaseContext(), "Couldn't retrieve user location",
 							Toast.LENGTH_SHORT).show();
 				}
-
-
-
 
 				String state = Environment.getExternalStorageState();
 				if (Environment.MEDIA_MOUNTED.equals(state)) {
@@ -302,15 +284,17 @@ public class GpsActivity extends Activity {
 						//if (root.canWrite()) {
 						if (gpxFiles.canWrite()) {
 							outWpt.write("<wpt lat='" + tvLat.getText() + "' lon='" + tvLong.getText() + "'>\n" +
-									"<name>" + GpsSpeedValue + "kmh|" + intObdSpeed + "kmh|" + intObdRpm + "rpm|" + intObdCoolant + "deg|" + intObdTrottlePos + "%" + "</name>\n" +
-									//"<time>" + timeStamp + "</time>\n" +
-									"<time>" + timestamp() + "</time>\n" +
-									"<sym>" + "triangle" + "</sym>\n" +
+									//"<name>" + GpsSpeedValue + "kmh|" + intObdSpeed + "kmh|" + intObdRpm + "rpm|" + intObdCoolant + "deg|" + intObdTrottlePos + "%" + "</name>\n" +
+									"<name>" + intObdSpeed + "kmh|" + intObdRpm + "rpm|" + intObdCoolant + "deg|" + intObdEngineLoad + "%|" + intObdTrottlePos + "%" + "</name>\n" +
+									"<time>" + timeStamp + "</time>\n" +
+									"<sym>" + "pin" + "</sym>\n" +
 									"</wpt>\n");
 
 							outTrkpnt.write("<trkpt lat='" + tvLat.getText() + "' lon='" + tvLong.getText() + "'>\n" +
 									 "<time>" + timeStamp + "</time>\n" +
 									 "</trkpt>\n");
+
+							//outWptTrkpnt.write("Test");
 
 							//"<desc>" + Lat.=51.295094, Long.=6.790674, Alt.=39.000000m, Speed=3Km/h, Course=45deg. + "</desc>\n" +
 							//"<sym>" + Scenic Area + "</sym>\n" +
@@ -341,6 +325,13 @@ public class GpsActivity extends Activity {
 		};
 	}
 
+	protected static String timestamp() {
+		Calendar c = Calendar.getInstance();
+		SimpleDateFormat dateformat = new SimpleDateFormat("dd MMMM yyyy HH:mm:ss");
+		String datetime = dateformat.format(c.getTime());
+		return datetime;
+	}
+
 	@Override
 	/** onCreate() is called at start of activity */
 	public void onCreate(Bundle savedInstanceState) {
@@ -349,7 +340,7 @@ public class GpsActivity extends Activity {
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-
+		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
 		Criteria locationCriteria = new Criteria();
 		locationCriteria.setAccuracy(Criteria.ACCURACY_FINE);
@@ -359,11 +350,14 @@ public class GpsActivity extends Activity {
 		gpxFiles.mkdirs();
 		//root = Environment.getExternalStorageDirectory();
 
-        FilenameWpt = "/" + timeStamp + "-wpt" + ".gpx";
+		FilenameWpt = timeStamp + "-wpt" + ".gpx";
 		gpxWptFile = new File(gpxFiles, FilenameWpt);
 
         FilenameTrkpt = "/" + timeStamp + "-trkpt" + ".gpx";
 		gpxTrkptFile = new File(gpxFiles, FilenameTrkpt);
+
+		FilenameWptTrkpt = "/" + timeStamp + "-wpttrkpt" + ".gpx";
+		gpxWptTrkptFile = new File(gpxFiles, FilenameWptTrkpt);
 
 		tvDate = (TextView) findViewById(R.id.Date);
 		tvProvider = (TextView) findViewById(R.id.Provider);
@@ -397,9 +391,9 @@ public class GpsActivity extends Activity {
 		obdLogIntervalInt = Integer.parseInt(obdLogIntervalString);
 		btMacAddress = myPreference.getString("btMacAddress", btMacAddress);
 		myPreferenceEditor.putString("btMacAddress", btMacAddress).commit();//test
-		Toast.makeText(this, "gpsLoginterval: " + gpsLogIntervalString, Toast.LENGTH_LONG).show(); //test
-		Toast.makeText(this, "obdLoginterval: " + obdLogIntervalString, Toast.LENGTH_LONG).show(); //test
-		Toast.makeText(this, "BT-Address: " + btMacAddress, Toast.LENGTH_LONG).show(); //test
+		//Toast.makeText(this, "gpsLoginterval: " + gpsLogIntervalString, Toast.LENGTH_LONG).show(); //test
+		//Toast.makeText(this, "obdLoginterval: " + obdLogIntervalString, Toast.LENGTH_LONG).show(); //test
+		//Toast.makeText(this, "BT-Address: " + btMacAddress, Toast.LENGTH_LONG).show(); //test
 
 		// Get local Bluetooth adapter
 		mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -495,47 +489,30 @@ public class GpsActivity extends Activity {
 			outTrkpnt.write("<trk>\n");
 			outTrkpnt.write("<name>ACTIVE LOG</name>\n");
 			outTrkpnt.write("<trkseg>\n");
-
-
 		} catch (IOException e) {
 			Toast.makeText(getBaseContext(), "SD card not available.",
 					Toast.LENGTH_SHORT).show();
 		}
 	}
 
-	protected static String timestamp(){
-		Calendar c = Calendar.getInstance();
-		SimpleDateFormat dateformat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-		String datetime = dateformat.format(c.getTime());
-		return datetime;
-	}
-
-
 	@Override
-	/** The menu with 'Exit' is generated only*/
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
 		getMenuInflater().inflate(R.menu.menu, menu);
 		return true;
 	}
 
-
 	//@Override
 	public void onStart() {
 		super.onStart();
+		//btDevice = mBluetoothAdapter.getRemoteDevice(btMacAddress); //direct verbinden met
+		//mChatService.connect(btDevice, true);
 		obdRun();
 	}
-
 
 	//@Override
 	public void onPause() {
 		super.onPause();
-		//SharedPreferences myPreference = PreferenceManager.getDefaultSharedPreferences(this);
-		//SharedPreferences.Editor myPreferenceEditor = myPreference.edit();
-		//obdLogIntervalString =myPreference.getString("obdloginterval",obdLogIntervalString);
-		//myPreferenceEditor.putString("obdlogInterval",obdLogIntervalString).commit();
-		//Toast.makeText(this, "obdLoginterval: " + obdLogIntervalString, Toast.LENGTH_LONG).show(); //test
-		//obdLogIntervalInt =Integer.parseInt(obdLogIntervalString);
 		//btDevice = mBluetoothAdapter.getRemoteDevice(btMacAddress); //direct verbinden met
 		//mChatService.connect(btDevice, true);
 		obdRun();
@@ -544,14 +521,25 @@ public class GpsActivity extends Activity {
 	@Override
 	public void onStop() {
 		super.onStop();
-		Toast.makeText(this, "BT-Address: " + btMacAddress, Toast.LENGTH_LONG).show(); //test
-		obdRun();
+		//btDevice = mBluetoothAdapter.getRemoteDevice(btMacAddress); //direct verbinden met
+		//mChatService.connect(btDevice, true);
+		//obdRun();
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
-		obdRun();
+		//btDevice = mBluetoothAdapter.getRemoteDevice(btMacAddress); //direct verbinden met
+		//mChatService.connect(btDevice, true);
+		//obdRun();
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		Toast.makeText(this, "Destroy: BT Service Destroyed", Toast.LENGTH_LONG).show();
+		finish();
+		System.exit(0);
 	}
 
     /*-------------------------------------------
@@ -578,7 +566,7 @@ public class GpsActivity extends Activity {
 
 	/** The selected menu item is executed */
     public boolean onOptionsItemSelected(MenuItem item) {
-		Intent serverIntent = null;
+		Intent serverIntent;
 		switch (item.getItemId())
       {
        case R.id.secure_connect_scan:
@@ -592,14 +580,15 @@ public class GpsActivity extends Activity {
                  	 break;
        	case R.id.menu_write_file:
     			 try {
-    				outWpt.write("</gpx>\n");
+					 //outWpt.write("</gpx>\n");
     				outWpt.close();
 
-    				outTrkpnt.write("</trkseg>\n" +
-                        "</trk>\n");
-					outTrkpnt.close();
-    				Toast.makeText(getBaseContext(), "File written.", Toast.LENGTH_SHORT).show();
-    			 } catch (IOException e) {
+					 outTrkpnt.write("</trkseg>\n" + "</trk>\n");
+					 outTrkpnt.write("</gpx>\n");
+					 outTrkpnt.close();
+					 CombineGpxFiles(gpxWptFile, gpxTrkptFile);
+					 Toast.makeText(getBaseContext(), "File written.", Toast.LENGTH_SHORT).show();
+				 } catch (IOException e) {
                  //Toast.makeText(getBaseContext(), "SD card not available.",
           		 //Toast.LENGTH_SHORT).show();
               	 }
@@ -610,15 +599,14 @@ public class GpsActivity extends Activity {
                         //boolean deleted = gpxFile.delete();
                         outWpt.flush();
         				outWpt.close();
-						gpxWptFile.delete();
+						//gpxWptFile.delete();
 
 						outTrkpnt.flush();
 						outTrkpnt.close();
-						gpxTrkptFile.delete();
+						//gpxTrkptFile.delete();
         				//File gpxFile = new File(root, Filename);
-        				Toast.makeText(getBaseContext(), "File not written.",
-             			Toast.LENGTH_SHORT).show();
-        			} catch (IOException e) {
+						Toast.makeText(getBaseContext(), "File not written.", Toast.LENGTH_SHORT).show();
+					} catch (IOException e) {
                     //Toast.makeText(getBaseContext(), "SD card not available.", Toast.LENGTH_SHORT).show();
                   	}
                    	GpsActivity.this.finish();
@@ -628,8 +616,58 @@ public class GpsActivity extends Activity {
         }
         return super.onOptionsItemSelected(item);
      }
-    
-    
+
+	//Merge wpt en trkkpnt file to one
+	//private void CombineGpxFiles(String file1, String file2) {
+	private void CombineGpxFiles(File file1, File file2) {
+		FileInputStream in1, in2;
+		FileOutputStream out;
+
+		Integer bufferSize = (int) (long) (file1.length() + file2.length());
+		//Integer bufferSize = 4096;
+
+		byte[] data = new byte[bufferSize];
+
+		try {
+			in1 = new FileInputStream(file1);
+			in2 = new FileInputStream(file2);
+			SequenceInputStream sistream = new SequenceInputStream(in1, in2);
+			out = new FileOutputStream(gpxWptTrkptFile);
+
+			int temp;
+
+			while ((temp = sistream.read()) != -1) {
+
+				out.write(temp);
+			}
+
+			/*
+			while (in1.read(data) != -1) {
+				out.write(data);
+			}
+			while (in2.read(data) != -1) {
+				out.write(data);
+			}
+			*/
+
+			out.close();
+			sistream.close();
+			in1.close();
+			in2.close();
+
+			Toast.makeText(this, "Done combining files!!", Toast.LENGTH_LONG).show();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+
+
+
+
+
     public void sendMessage(String message) {
 		// Check that we're actually connected before trying anything
 		if (mChatService.getState() != BluetoothChatService.STATE_CONNECTED) {
@@ -667,7 +705,7 @@ public class GpsActivity extends Activity {
 				// When the request to enable Bluetooth returns
 				if (resultCode == Activity.RESULT_OK) {
 					// Bluetooth is now enabled, so set up a chat session
-					//setupChat();
+					setupChat();
 				} else {
 					// User did not enable Bluetooth or an error occurred
 					Log.d(TAG, "BT not enabled");
@@ -684,23 +722,26 @@ public class GpsActivity extends Activity {
 		mOutStringBuffer = new StringBuffer();
 	}
 
+
 	private final void setStatus(int resId) {
 		final ActionBar actionBar = getActionBar();
 		actionBar.setSubtitle(resId);
 	}
 
+	/*
 	private final void setStatus(CharSequence subTitle) {
 		final ActionBar actionBar = getActionBar();
 		actionBar.setSubtitle(subTitle);
-	}	
-   
+	}
+	*/
+
     private void connectDevice(Intent data, boolean secure) {
 		// Get the device MAC address
 		btMacAddress = data.getExtras().getString(DeviceListActivity.EXTRA_DEVICE_ADDRESS);
 
 		SharedPreferences myPreference=PreferenceManager.getDefaultSharedPreferences(this);
 	    SharedPreferences.Editor myPreferenceEditor = myPreference.edit();
-        myPreferenceEditor.putString("btMacAddress", btMacAddress).commit();//test
+		myPreferenceEditor.putString("btMacAddress", btMacAddress).apply();//test
 		// Get the BluetoothDevice object
 		BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(btMacAddress);
 		// Attempt to connect to the device
@@ -718,76 +759,76 @@ public class GpsActivity extends Activity {
 					public void run() {
 						switch (Teller) {
 							case 0:
-								tvMsgWindow.append("\n" + "ATZ: reset all " + Teller + "\n");
-								//sendMessage("ATZ" + "\r"); //Test geeft OK
-								break;
-							case 1:
-								tvMsgWindow.append("\n" + "ATE1: echo on " + Teller + "\n");
-								//sendMessage("ATE1" + "\r"); //Echo on
-								break;
-							case 2:
-								tvMsgWindow.append("\n" + "AT@1: dev. descr. " + Teller + "\n");
-								//sendMessage("AT@1" + "\r"); //Protocol geeft?
-								break;
-							case 3:
-								tvMsgWindow.append("\n" + "ATSP0: prot. auto " + Teller + "\n");
-								//sendMessage("ATSP0" + "\r"); //Protocol geeft AUTO
-								break;
-							case 4:
-								tvMsgWindow.append("\n" + "ATDP: display prot." + Teller + "\n");
-								//sendMessage("ATDP" + "\r"); //Buffer Dump
-								break;
-							case 5:
-								tvMsgWindow.append("\n" + "ATDPN: prot. number " + Teller + "\n");
-								//sendMessage("ATDPN" + "\r"); //
-								break;
-							case 6:
-								tvMsgWindow.append("\n" + "ATBD: buffer dump " + Teller + "\n");
-								//sendMessage("ATBD" + "\r"); //S
-								break;
-							case 7:
-								tvMsgWindow.append("\n" + "ATRD: read stored data " + Teller + "\n");
-								//sendMessage("ATRD" + "\r"); //SPEED
-								break;
-							case 8:
-								tvMsgWindow.append("\n" + "ATRV: voltage " + Teller + "\n");
-								//sendMessage("ATRV" + "\r"); //SPEED
-								break;
-							case 9:
-								tvMsgWindow.append("\n" + "RPM: toeren " + Teller + "\n");
-								sendMessage("01" + strObdRpm + "\r"); //RPM
-								break;
-							case 10:
-								tvMsgWindow.append("\n" + "SPEED: " + Teller + "\n");
+								tvMsgWindow.append("\n" + "010D: speed " + Teller + "\n");
 								sendMessage("01" + strObdSpeed + "\r"); //SPEED
 								break;
-							case 11:
-								tvMsgWindow.append("\n" + "COOLANT: " + Teller + "\n");
+							case 1:
+								tvMsgWindow.append("\n" + "010C: rpm " + Teller + "\n");
+								sendMessage("01" + strObdRpm + "\r"); //RPM
+								break;
+							case 2:
+								tvMsgWindow.append("\n" + "0105: coolant " + Teller + "\n");
 								sendMessage("01" + strObdCoolant + "\r"); //Coolant
 								break;
-							case 12:
+							case 3:
 								tvMsgWindow.append("\n" + "0104: engine load " + Teller + "\n");
 								sendMessage("01" + strObdEngineLoad + "\r"); //load
 								break;
-							case 13:
+							case 4:
 								tvMsgWindow.append("\n" + "0111: trottlepos " + Teller + "\n");
 								sendMessage("01" + strObdTrottlePos + "\r"); //load
 								break;
-							case 14:
+							case 5:
 								tvMsgWindow.append("\n" + "0143: absload " + Teller + "\n");
 								sendMessage("01" + strObdAbsLoad + "\r"); //load
 								break;
-							case 15:
+							case 6:
+								tvMsgWindow.append("\n" + "ATRV: voltage " + Teller + "\n");
+								sendMessage("ATRV" + "\r"); //SPEED
+								break;
+							case 7:
 								tvMsgWindow.append("\n" + "0146: amb.air " + Teller + "\n");
 								sendMessage("01" + strObdAmbientAir + "\r"); //load
 								break;
-							case 16:
+							case 8:
 								tvMsgWindow.append("\n" + "0146: oil temp " + Teller + "\n");
 								sendMessage("01" + strObdOilTemp + "\r"); //load
 								break;
-							case 17:
+							case 9:
 								tvMsgWindow.append("\n" + "012F: fuel level " + Teller + "\n");
 								sendMessage("01" + strObdFuelLevel + "\r"); //load
+								break;
+							case 10:
+								tvMsgWindow.append("\n" + "ATZ: reset all " + Teller + "\n");
+								//sendMessage("ATZ" + "\r"); //Test geeft OK
+								break;
+							case 11:
+								tvMsgWindow.append("\n" + "ATE1: echo on " + Teller + "\n");
+								//sendMessage("ATE1" + "\r"); //Echo on
+								break;
+							case 12:
+								tvMsgWindow.append("\n" + "AT@1: dev. descr. " + Teller + "\n");
+								//sendMessage("AT@1" + "\r"); //Protocol geeft?
+								break;
+							case 13:
+								tvMsgWindow.append("\n" + "ATSP0: prot. auto " + Teller + "\n");
+								//sendMessage("ATSP0" + "\r"); //Protocol geeft AUTO
+								break;
+							case 14:
+								tvMsgWindow.append("\n" + "ATDP: display prot." + Teller + "\n");
+								//sendMessage("ATDP" + "\r"); //Buffer Dump
+								break;
+							case 15:
+								tvMsgWindow.append("\n" + "ATDPN: prot. number " + Teller + "\n");
+								//sendMessage("ATDPN" + "\r"); //
+								break;
+							case 16:
+								tvMsgWindow.append("\n" + "ATBD: buffer dump " + Teller + "\n");
+								//sendMessage("ATBD" + "\r"); //S
+								break;
+							case 17:
+								tvMsgWindow.append("\n" + "ATRD: read stored data " + Teller + "\n");
+								//sendMessage("ATRD" + "\r"); //SPEED
 								break;
 							case 18:
 								tvMsgWindow.append("\n" + "ATCS: CAN status " + Teller + "\n");
@@ -815,7 +856,7 @@ public class GpsActivity extends Activity {
 						//ObdBytes = null;
 						//readValue = "";
 						Teller++;
-						if (Teller >= 23) Teller = 0;
+						if (Teller >= 8) Teller = 0;
 					}
 				});
 			}

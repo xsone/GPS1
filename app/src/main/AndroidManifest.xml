@@ -4,17 +4,17 @@
       android:versionCode="1"
       android:versionName="Testing" >
     <?uses-sdk android:targetSdkVersion="22"?>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET"/>
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-	<uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
 	
     <application 
         android:allowBackup="true"
@@ -32,9 +32,6 @@
         <activity android:name="com.gps.Prefs"
             android:label="@string/app_name" />
 
-        <activity android:name="com.gps.OBDscanMainActivity"
-         		  android:label="@string/app_name" /> 
-         		  
         <activity android:name="com.gps.DeviceListActivity"
                   android:label="@string/select_device"
                   android:textColor="#ecad14"

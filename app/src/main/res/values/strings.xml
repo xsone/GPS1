@@ -1,30 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">OBD | GPS | Trafficbox</string>
-    
-    <string name="obd_test">OBD Scanner</string>
-    <string name="obd_rpm">OBD RPM</string>
-    <string name="obd_coolant">OBD Coolant</string>
-    <string name="obd_monitor">OBD Monitor</string>
-    <string name="start_meting">Start Sampling</string>
-    <string name="stop_meting">Stop</string>
-    <string name="save_meting">Save to Sample File</string>
-    <string name="show_alert_dialog">Alert</string>
-  
-    <string name="actual_ObdValue">ObdValue</string>
-    <string name="start_ObdValue">0</string>
-    <string name="actual_ObdPid">ObdPid</string>
-    <string name="start_ObdPid">0</string>
-    <string name="actual_ObdData">ObdData</string>
-    <string name="start_ObdData">0</string>
 
-    <string name="action_settings">Settings</string>
+    <string name="date">"Date: "</string>
+    <string name="provider">"Provider: "</string>
+    <string name="latitude">"Latitude: "</string>
+    <string name="longitude">"Longitude: "</string>
+    <string name="altitude">"Altitude: "</string>
+    <string name="gpsspeed">"GpsSpeed: "</string>
+    <string name="obdspeed">"ObdSpeed: "</string>
+    <string name="obdrpm">"ObdRpm: "</string>
+    <string name="obdcoolant">"ObdCoolant: "</string>
+    <string name="engineload">"EngineLoad: "</string>
+    <string name="throttlepos">"ThrottlePos: "</string>
+    <string name="absload">"AbsLoad: "</string>
+    <string name="ambientairtemp">"AmbientAirTemp: "</string>
+    <string name="oiltemp">"OilTemp: "</string>
+    <string name="fuellevel">"FuelLevel: "</string>
+    <string name="filename">"FileName: "</string>
+    <string name="timestamp">"TimeStamp: "</string>
+    <string name="datastream">"DATA STREAM: "</string>
+
     <string name="data_view">Data View</string>
- 
    	<string name="start">Start</string>
-
     <string name="action_start">Start</string>
-    
     <string name="command_button">Test</string>
 
     <!--  Menu Settings -->
