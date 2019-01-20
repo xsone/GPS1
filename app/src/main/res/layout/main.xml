@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="@color/black"
     android:keepScreenOn="true"
     >
 
@@ -15,13 +15,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:text="@string/date" />
 
         <TextView
             android:id="@+id/Date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#00ff00"
+            android:textColor="@color/lightgreen"
             android:textSize="15.0sp" />
     </LinearLayout>
 
@@ -33,6 +34,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:text="@string/provider" />
 
         <TextView
@@ -51,6 +53,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:text="@string/latitude" />
 
         <TextView
@@ -69,6 +72,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:text="@string/longitude" />
 
         <TextView
@@ -87,6 +91,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:text="@string/altitude" />
 
         <TextView
@@ -105,6 +110,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:text="@string/gpsspeed" />
 
         <TextView
@@ -123,6 +129,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:text="@string/obdspeed" />
 
         <TextView
@@ -141,6 +148,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:text="@string/obdrpm" />
 
         <TextView
@@ -159,6 +167,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:text="@string/obdcoolant" />
 
         <TextView
@@ -177,6 +186,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:text="@string/engineload" />
 
         <TextView
@@ -195,6 +205,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:text="@string/throttlepos" />
 
         <TextView
@@ -213,6 +224,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:text="@string/absload" />
 
         <TextView
@@ -231,6 +243,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:text="@string/ambientairtemp" />
 
         <TextView
@@ -249,6 +262,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:text="@string/oiltemp" />
 
         <TextView
@@ -267,6 +281,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:text="@string/fuellevel" />
 
         <TextView
@@ -286,15 +301,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/filename"
-        />
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/Filename"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="15.0sp"
-            android:textColor="#00ff00"
-         />
+            android:textColor="#00ff00" />
     </LinearLayout>
 
     <LinearLayout
@@ -305,6 +319,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:text="@string/timestamp" />
 
         <TextView

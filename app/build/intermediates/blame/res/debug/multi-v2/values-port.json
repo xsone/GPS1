@@ -1,18 +1,11 @@
 {
     "logs": [
         {
-            "outputFile": "F:\\AndroidAppsJack\\GPS1\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-port\\values-port.xml",
+            "outputFile": "F:\\AndroidAppsJack\\OBD_GPS_Trafficbox\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-port\\values-port.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Jack\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-22.0.0.aar\\7429d3b642db2f2acaa6f26bc8a5af03\\res\\values-port\\values.xml",
+                    "source": "C:\\Users\\Jack\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\be1d8327bf5070a0e22d4641471fe926\\res\\values-port\\values-port.xml",
                     "from": {
-                        "startLines": "4",
-                        "startColumns": "4",
-                        "startOffsets": "276",
-                        "endColumns": "55",
-                        "endOffsets": "327"
-                    },
-                    "to": {
                         "startLines": "2",
                         "startColumns": "4",
                         "startOffsets": "55",

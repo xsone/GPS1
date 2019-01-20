@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-      package="com.gps"
+    package="com.trafficbox"
       android:versionCode="1"
       android:versionName="Testing" >
-    <?uses-sdk android:targetSdkVersion="22"?>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
@@ -21,18 +20,20 @@
         android:icon="@drawable/ic_launcher"
         android:label="OBD | GPS | Trafficbox">
         <activity
-          android:name="com.gps.GpsActivity"
+            android:name="com.trafficbox.GpsActivity"
             android:label="OBD | GPS | Trafficbox"
-         > 
-            <intent-filter>
+        >
+        <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>    
-        <activity android:name="com.gps.Prefs"
+        </activity>
+        <activity
+            android:name="com.trafficbox.Prefs"
             android:label="@string/app_name" />
 
-        <activity android:name="com.gps.DeviceListActivity"
+        <activity
+            android:name="com.trafficbox.DeviceListActivity"
                   android:label="@string/select_device"
                   android:textColor="#ecad14"
                   android:configChanges="orientation|keyboardHidden" />
