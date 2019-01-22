@@ -452,7 +452,6 @@ public class GpsActivity extends Activity {
                   locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListener);
                   Toast.makeText(getBaseContext(), "GPS Enabled", Toast.LENGTH_LONG).show();
                   if (locationManager != null) {
-                      gpsLogIntervalInt = 1; //test
                       location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
                       provider = locationManager.getProvider(LocationManager.GPS_PROVIDER);
                       locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
@@ -465,6 +464,7 @@ public class GpsActivity extends Activity {
                       if (location != null) {
                           tvLong.setText(Double.toString(location.getLongitude()));
                           tvLat.setText(Double.toString(location.getLatitude()));
+                          Toast.makeText(this, "GPS log interval: " + gpsLogIntervalInt , Toast.LENGTH_LONG).show(); //test
                       }
                   }
               }
